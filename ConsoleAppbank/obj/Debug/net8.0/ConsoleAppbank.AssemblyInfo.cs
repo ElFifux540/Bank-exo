@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleAppbank")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cc11cfa58e4b57d3ead604b341a952e0aae89388")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1899992148e357b3367045dc00a3e105b6c24b5c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConsoleAppbank")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConsoleAppbank")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
