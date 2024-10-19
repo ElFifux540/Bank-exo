@@ -72,6 +72,12 @@ Créer une classe 'SavingsAccount' pour la gestion d'un carnet d'épargne implé
 Définir la classe 'Account' reprenant les parties commune aux classes 'CurrentAccount' et 'SavingsAccount' en utilisant les concepts d'héritage, de redéfinition de méthodes et si besoin, de surcharge de méthodes et d'encapsulation.
 Attention le niveau d'accessibilité du mutateur de la propriété Balance doit rester 'private'.
 
+```mermaid
+  graph TD;
+      Account-->CurrentAccount;
+      Account-->SavingsAccount;
+```
+
 ### 8. Update Classe 'Bank'
 
 Modifier la classe 'Bank' afin qu'elle ne travaille qu'avec des comptes.
