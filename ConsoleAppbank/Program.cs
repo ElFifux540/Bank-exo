@@ -1,24 +1,47 @@
-﻿public class CurrentAccount
+﻿public class Account
 {
     public string Number { get; set; }
-    public double Balance { get; private set; }
-    public double CreditLine { get; set; }
+    public double Balance { get; protected set; }
     public Person Owner { get; set; }
 
-    public CurrentAccount(string number, double initialBalance, double creditLine, Person owner)
+    public Account(string number, double initialBalance, Person owner)
     {
         Number = number;
         Balance = initialBalance;
-        CreditLine = creditLine;
         Owner = owner;
     }
 
-    public void Withdraw(double amount)
+    public virtual void Deposit(double amount)
     {
         if (amount <= 0)
         {
             throw new ArgumentException("Amount must be greater than zero.");
         }
+        Balance += amount;
+    }
+
+    public virtual void Withdraw(double amount)
+    {
+        if (amount <= 0)
+        {
+            throw new ArgumentException("Amount must be greater than zero.");
+        }
+    }
+}
+
+public class CurrentAccount : Account
+{
+    public double CreditLine { get; set; }
+
+    public CurrentAccount(string number, double initialBalance, double creditLine, Person owner)
+        : base(number, initialBalance, owner)
+    {
+        CreditLine = creditLine;
+    }
+
+    public override void Withdraw(double amount)
+    {
+        base.Withdraw(amount);
 
         if (Balance - amount < -CreditLine)
         {
@@ -27,22 +50,32 @@
 
         Balance -= amount;
     }
+}
 
-    public void Deposit(double amount)
+public class SavingsAccount : Account
+{
+    public DateTime DateLastWithdraw { get; private set; }
+
+    public SavingsAccount(string number, double initialBalance, Person owner)
+        : base(number, initialBalance, owner)
     {
-        if (amount <= 0)
+        DateLastWithdraw = DateTime.MinValue;
+    }
+
+    public override void Withdraw(double amount)
+    {
+        base.Withdraw(amount);
+
+        if (amount > Balance)
         {
-            throw new ArgumentException("Amount must be greater than zero.");
+            throw new InvalidOperationException("Insufficient funds in savings account.");
         }
 
-        Balance += amount;
-    }
-
-    public double GetBalance()
-    {
-        return Balance;
+        Balance -= amount;
+        DateLastWithdraw = DateTime.Now;
     }
 }
+
 
 class Program
 {
@@ -66,7 +99,7 @@ class Program
         account1.Deposit(500.0);
         Console.WriteLine($"Solde après dépôt de 500 : {bank.GetAccountBalance("123456")}");
         
-        account1.Withdraw(300.0);
+        account1.Withdraw(3000.0);
         Console.WriteLine($"Solde après retrait de 300 : {bank.GetAccountBalance("123456")}");
 
         Console.WriteLine($"Somme des comptes pour Julie Martin : {bank.GetTotalBalanceForPerson(person1)}");

@@ -1,7 +1,6 @@
-
 public class Bank
 {
-    public Dictionary<string, CurrentAccount> Accounts { get; private set; } = new Dictionary<string, CurrentAccount>();
+    public Dictionary<string, Account> Accounts { get; private set; } = new Dictionary<string, Account>();
 
     public string Name { get; set; }
 
@@ -9,7 +8,8 @@ public class Bank
     {
         Name = name;
     }
-    public void AddAccount(CurrentAccount account)
+
+    public void AddAccount(Account account)
     {
         if (Accounts.ContainsKey(account.Number))
         {
@@ -17,6 +17,7 @@ public class Bank
         }
         Accounts[account.Number] = account;
     }
+
     public void DeleteAccount(string number)
     {
         if (!Accounts.ContainsKey(number))
@@ -31,7 +32,8 @@ public class Bank
         {
             throw new ArgumentException($"Nothing found with number {accountNumber}.");
         }
-        return Accounts[accountNumber].GetBalance();
+
+        return Accounts[accountNumber].Balance;
     }
     public double GetTotalBalanceForPerson(Person person)
     {
@@ -40,7 +42,7 @@ public class Bank
         {
             if (account.Owner == person)
             {
-                totalBalance += account.GetBalance();
+                totalBalance += account.Balance;
             }
         }
         return totalBalance;
