@@ -106,32 +106,71 @@ Ajouter une méthode abstraite « protected » à la classe « Account » ayant 
 
 Ajouter une méthode 'public' à la classe 'Account' appelée 'ApplyInterest' qui additionnera le solde avec le retour de la méthode 'CalculInterest'.
 
+---
+
 ### 12. Interface 'IAccount'
 
 Créer une interface 'IAccount' afin de limiter l'accès à consulter la propriété 'Balance' et d'utiliser les méthodes 'Deposite' et 'Withdraw'.
 
+---
+
 ### 13. Interface 'IBankAccount'
+
 Créer l'interface 'IDankAccount'ayant les mêmes fonctionnalités que 'IAccount'. Elle lui permettra, en plus, d'invoquer la méthode du 'ApplyInteret' et offrira un accès en lecture au 'Owner' et au 'Number'.
 
+---
+
 ### 14. Update classe 'Account'
-Ajouter a la classe 'Account', deux constructeurs prenant en paramètre :
 
-- **Le numéro et le titulaire**
+- **Ajouter a la classe 'Account', deux constructeurs prenant en paramètre** :
+  
+  - `Le numéro et le titulaire`
+  - `Le numéro, le titulaire et le solde (pour le cas d'une base de données)`
 
-- **Le numéro, le titulaire et le solde (pour le cas d'une base de données)**
+---
 
 ### 15. Update Classes 'Current' et 'SavingsAccount'
+
 Ajoutez le ou les constructeurs aux classes 'Current' et 'SavingsAccount'.
 
+---
+
 ### 16. Update Classes 'Person', 'Account' et 'SavingsAccount'
+
 Changer l'encapsulation des propriétés des classes 'Person', 'Account' et 'SavingsAccount' afin de spécifier leur mutateur en 'private'.
 
+---
+
 ### 17. Update bank 
+
 Définir ce qu'il manque pour que le programme continue à tourner.
 
-### 18. Update Classe Account
+---
+
+### 18. Update Classe 'Account'
+
 - **Au niveau de la méthode 'Deposit', déclenchez une exception de type 'ArgumentOutOfRangeException' si le montant n'est pas supérieur à 0 (zéro).**
+
 - **Faites de même au niveau de la méthode 'Withdraw' et y ajouter le déclenchement d'une exception de type 'InsufficientBalanceException' si le montant ne peut être retiré.**
 
+---
+
 ### 19. Update Classe 'Current'
+
 Au niveau de la propriété 'CreditLine', déclenchez une exception de type 'ArgumentOutOfRangeException' si la valeur n'est pas supérieur ou égale à 0 (zéro).
+
+---
+
+### 20. Update Classe 'Account'
+
+Ajoutez un événement appelé 'NegativeBalanceEvent' dont le délégué 'NegativeBalanceDelegate' devra recevoir en paramètre un objet de type 'Account' et ne rien renvoyer.
+
+---
+
+### 21. Update Classe 'Current'
+
+Déclenchez l'évènement 'NegativeBalanceEvent' si le compte passe en négatif et uniquement dans ce cas.
+
+---
+### 22. Update Classe 'Bank'
+Ajouter une méthode qui traitera l'évènement 'NegativeBalanceAction' en affichant dans ma console 'Le numéro de compte {Number} vient de passer en négatif'.
